@@ -1,73 +1,50 @@
 let character; 
+let monsterBird; 
+let ghost; 
+
+let count = 0; 
 
 function setup() {
   createCanvas(400, 400);
-  frameRate(25);
+  frameRate(30);
 
   character = new Character(walkingImage, 20, height - 67, 41, 67, {
     captureX: 0,
     captureY: 0,
     fillX: 41,
     fillY: 67, 
-    frames: [
-      0 , 0, 0, 0, 0,
-      41, 41, 41, 41, 41, 
-      82, 82, 82, 82, 82
-    ]
+    frames: [ 0, 41, 82 ]
   }); 
-   //image(walkingImage, 100, 0, 41, 67, walkingAnimation[walkingFrame], 0, 41, 67);
 
-  walkingAnimation = [
-    0 , 0, 0, 0, 0,
-    41, 41, 41, 41, 41, 
-    82, 82, 82, 82, 82
-   ];
+  monsterBird = new Enimy(birdImage, width - 67, 200, 67, 46, {
+    captureX: 0,
+    captureY: 0,
+    fillX: 67,
+    fillY: 46, 
+    frames: [ 0 , 67 ]
+  });
 
-  // birdAnimation = [
-  //   0, 0, 0, 0, 0,
-  //   46, 46, 46, 46
-  // ]; 
-
-  // ghostAnimation = [
-  //   0, 0, 0, 0, 0,
-  //   42, 42, 42, 42
-  // ];
-
-  // deadAnimation = [
-  //   0 , 0, 0, 0, 0,
-  //   47, 47, 47, 47, 
-  //   92, 92, 92, 92, 
-  //  ];
+  ghost = new Enimy(ghostImage, width - 67, height - 45, 42, 45, {
+    captureX: 0,
+    captureY: 0,
+    fillX: 42,
+    fillY: 45, 
+    frames: [ 0 , 42 ]
+  });
+  
 }
 
 function draw() {
-  background(225);
+  //background('#09adff');
+  background(255);
 
   character.show(); 
+  monsterBird.show();  
+  ghost.show();
 
-  
-  // image(birdImage, 10, 0, 67, 46, 0, birdAnimation[birdFrame], 67, 46);
+  count++; 
 
-  // if(birdFrame >= birdAnimation.length -1) {
-  //   birdFrame = 0; 
-  // }else {
-  //   birdFrame++; 
-  // }  
-
-  // image(ghostImage, 160, 0, 42, 45, ghostAnimation[ghostFrame], 0, 42, 45);
-
-  // if(ghostFrame >= ghostAnimation.length -1) {
-  //   ghostFrame = 0; 
-  // }else {
-  //   ghostFrame++; 
-  // }  
-
-
-  // image(deadImage, 210, 0, 47, 66, deadAnimation[deadFrame], 0, 47, 66);
-
-  // if(deadFrame >= deadAnimation.length -1) {
-  //   deadFrame = 0; 
-  // }else {
-  //   deadFrame++; 
-  // }  
+  if(count > 100) {
+    character.dead();
+  }
 }

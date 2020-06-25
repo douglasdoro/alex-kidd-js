@@ -1,38 +1,27 @@
-class Character {
+class Character extends Animation {
   constructor(image, x, y, width, height, spriteMap) {
-    this.image = image;
-    this.x = x;
-    this.y = y; 
-    this.width = width; 
-    this.height = height; 
-    this.spriteMap = spriteMap
+    super(image, x, y, width, height, spriteMap);
 
-    this.frame = 0; 
+    this.speedAnimation = .23; 
+
+    this.isDead = false; 
   }
 
-  show() {
-    image(this.image,
-      this.x,
-      this.y,
-      this.width,
-      this.height,
-      this.spriteMap.captureX,
-      this.spriteMap.captureY,
-      this.spriteMap.fillX,
-      this.spriteMap.fillY
-    );
-
-    this.animate(); 
-  }
-
-  animate() {
-    this.spriteMap.captureX = this.spriteMap.frames[this.frame]; 
-    
-    if(this.frame >= this.spriteMap.frames.length -1) {
-      this.frame = 0; 
-    } else {
-      this.frame++; 
-    }  
-
+  dead() {
+    if(!this.isDead) {
+      this.spriteMap = {
+        captureX: 0,
+        captureY: 0,
+        fillX: 46,
+        fillY: 66, 
+        frames: [ 0, 45, 89 ]
+      }
+  
+      this.image = deadImage;
+      this.width = 46; 
+      this.height = 66; 
+  
+      this.isDead = true; 
+    }
   }
 }
