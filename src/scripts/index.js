@@ -1,50 +1,23 @@
-let character; 
-let monsterBird; 
-let ghost; 
+const CANVAS_WIDTH = 500;
+const CANVAS_HEIGHT = 375; 
 
-let count = 0; 
+let game; 
 
 function setup() {
-  createCanvas(400, 400);
-  frameRate(30);
+  createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT); // 4 : 3
+  frameRate(25);
 
-  character = new Character(walkingImage, 20, height - 67, 41, 67, {
-    captureX: 0,
-    captureY: 0,
-    fillX: 41,
-    fillY: 67, 
-    frames: [ 0, 41, 82 ]
-  }); 
+  game = new Game(); 
+}
 
-  monsterBird = new Enimy(birdImage, width - 67, 200, 67, 46, {
-    captureX: 0,
-    captureY: 0,
-    fillX: 67,
-    fillY: 46, 
-    frames: [ 0 , 67 ]
-  });
-
-  ghost = new Enimy(ghostImage, width - 67, height - 45, 42, 45, {
-    captureX: 0,
-    captureY: 0,
-    fillX: 42,
-    fillY: 45, 
-    frames: [ 0 , 42 ]
-  });
-  
+function keyPressed() {
+  game.keyPressed(key); 
 }
 
 function draw() {
-  //background('#09adff');
-  background(255);
+  background('#09adff');
 
-  character.show(); 
-  monsterBird.show();  
-  ghost.show();
+  game.draw(); 
 
-  count++; 
-
-  if(count > 100) {
-    character.dead();
-  }
+ 
 }

@@ -11,7 +11,10 @@ class Animation {
     this.speedAnimation = .1; 
   }
 
-  show() {
+  draw() {
+    noFill();
+    rect(this.x, this.y, this.width, this.height);
+
     image(this.image,
       this.x,
       this.y,
@@ -23,8 +26,6 @@ class Animation {
       this.spriteMap.fillY
     );
 
-      console.log(this.spriteMap);
-
     this.animate(); 
   }
 
@@ -34,7 +35,6 @@ class Animation {
     if(this.frame >= this.spriteMap.frames.length -1) {
       this.frame = 0; 
     } else {
-      //this.frame++; 
       this.frame = this.frame + this.speedAnimation; 
     } 
   }

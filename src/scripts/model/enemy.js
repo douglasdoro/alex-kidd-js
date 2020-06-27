@@ -1,4 +1,4 @@
-class Enimy extends Animation {
+class Enemy extends Animation {
   constructor(image, x, y, width, height, spriteMap) {
     super(image, x, y, width, height, spriteMap);
 
