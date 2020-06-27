@@ -5,10 +5,12 @@ class Character extends Animation {
     this.speedAnimation = .23; 
     this.isDead = false; 
     this.isJumping = false; 
+    this.isCrouching = false; 
     this.jumpSpeed = 0; 
     this.gravity = 3; 
 
     this.defaultPositionY = this.y - this.height; 
+    this.yVariation = 0; 
   }
 
   jump() {
@@ -27,9 +29,30 @@ class Character extends Animation {
       fillX: 45,
       fillY: 61, 
       frames: [ 0 ]
-    }
+    };
 
     jumpSound.play(); 
+  }
+
+  crouched() {
+    
+    this.image = crouchedImage; 
+    this.width = 41; 
+    this.height = 56;
+    this.spriteMap = {
+      captureX: 0,
+      captureY: 0,
+      fillX: 41,
+      fillY: 56, 
+      frames: [ 0 ]
+    }
+
+    this.yVariation = 11; 
+
+    setTimeout(() => {
+      this.isCrouching = true; 
+      this.yVariation = 0; 
+    }, 1000);
   }
   
   applyGravity() {
@@ -37,12 +60,14 @@ class Character extends Animation {
     this.y =  this.y + this.jumpSpeed; 
     this.jumpSpeed = this.jumpSpeed + this.gravity
     
-    const isOutOfDefaultY = this.y > this.defaultPositionY;
-    if(isOutOfDefaultY) this.y = this.defaultPositionY; 
+    const isOutOfDefaultY = this.y > this.defaultPositionY + this.yVariation;
+    if(isOutOfDefaultY) this.y = this.defaultPositionY + this.yVariation; 
 
     const isJumping = this.isJumping && isOutOfDefaultY; 
-    if(isJumping) {
+    
+    if(isJumping || this.isCrouching) {
       this.isJumping = false; 
+      this.isCrouching = false; 
 
       this.image = walkingImage; 
       this.width = 41; 

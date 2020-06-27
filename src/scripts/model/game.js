@@ -17,9 +17,9 @@ class Game {
   over() {}
 
   keyPressed(key) {
-    if(key == 'ArrowUp') {
-      this.character.jump(); 
-    }
+    if(key === 'ArrowUp') this.character.jump(); 
+
+    if(key === 'ArrowDown') this.character.crouched();
   }
 
   _buildCharacter(x, y) {
