@@ -57,7 +57,7 @@ class Character extends Animation {
   
   applyGravity() {
     
-    this.y =  this.y + this.jumpSpeed; 
+    this.y = this.y + this.jumpSpeed; 
     this.jumpSpeed = this.jumpSpeed + this.gravity
     
     const isOutOfDefaultY = this.y > this.defaultPositionY + this.yVariation;

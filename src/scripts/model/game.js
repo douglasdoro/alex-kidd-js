@@ -1,15 +1,15 @@
 class Game {
   constructor() {
-    this.character = this._buildCharacter(20, CANVAS_HEIGHT);
+    this.character = this._buildCharacter(config.character.x, config.canvas.height);
     this.enemies = this._buildEnemies(); 
   }
 
   draw() {
     this.character.applyGravity(); 
-    
-    
+        
     this.character.draw(); 
     this.enemies[0].draw(); 
+    this.enemies[1].draw(); 
   }
 
   play() {}
@@ -23,13 +23,14 @@ class Game {
   }
 
   _buildCharacter(x, y) {
-    const character = new Character(walkingImage, x, y, 41, 67, {
-      captureX: 0,
-      captureY: 0,
-      fillX: 41,
-      fillY: 67, 
-      frames: [ 0, 41, 82 ]
-    }); 
+    const character = new Character(
+        walkingImage,
+        x, 
+        y,
+        config.character.walking.width,
+        config.character.walking.height,
+        config.character.walking.spriteMap
+      ); 
     
     return character; 
   }
@@ -37,21 +38,23 @@ class Game {
   _buildEnemies() {
     const enemies = []; 
 
-    const monsterBird = new Enemy(birdImage, width - 67, 200, 67, 46, {
-      captureX: 0,
-      captureY: 0,
-      fillX: 67,
-      fillY: 46, 
-      frames: [ 0 , 67 ]
-    });
+    const monsterBird = new Enemy(
+      birdImage,
+      config.enemies.monsterBird.x,
+      config.enemies.monsterBird.y,
+      config.enemies.monsterBird.width,
+      config.enemies.monsterBird.height,
+      config.enemies.monsterBird.spriteMap 
+    );
   
-    const ghost = new Enemy(ghostImage, width - 67, height - 45, 42, 45, {
-      captureX: 0,
-      captureY: 0,
-      fillX: 42,
-      fillY: 45, 
-      frames: [ 0 , 42 ]
-    });
+    const ghost = new Enemy(
+      ghostImage,
+      config.enemies.ghost.x,
+      config.enemies.ghost.y,
+      config.enemies.ghost.width,
+      config.enemies.ghost.height,
+      config.enemies.ghost.spriteMap 
+    );
 
     enemies.push(monsterBird, ghost);
 

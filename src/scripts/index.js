@@ -1,11 +1,6 @@
-const CANVAS_WIDTH = 500;
-const CANVAS_HEIGHT = 375; 
-
-let game; 
-
 function setup() {
-  createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT); // 4 : 3
-  frameRate(25);
+  createCanvas(config.canvas.width, config.canvas.height); // 4 : 3
+  frameRate(config.frameFate);
 
   game = new Game(); 
 }
@@ -18,6 +13,4 @@ function draw() {
   background('#09adff');
 
   game.draw(); 
-
- 
 }

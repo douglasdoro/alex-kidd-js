@@ -1,0 +1,56 @@
+{
+  "canvas": {
+    "width": 500,
+    "height": 375
+  },
+  "frameFate": 25, 
+  "character": {
+    "x": 20,
+    "y": 0,
+    "walking": {
+      "imagePath": "images/character/walking.png",   
+      "width": 41,
+      "height": 67, 
+      "spriteMap": {
+        "captureX": 0,
+        "captureY": 0,
+        "fillX": 41,
+        "fillY": 67, 
+        "frames": [ 0, 41, 82 ]
+      } 
+    }
+  },
+  "enemies": {
+    "ghost": {
+      "x": 433,
+      "y": 330,
+      "imagePath": "images/enemies/gost.png",   
+      "width": 42,
+      "height": 45, 
+      "spriteMap": {
+        "captureX": 0,
+        "captureY": 0,
+        "fillX": 42,
+        "fillY": 45, 
+        "frames": [ 0, 42 ]
+      } 
+    },
+    "monsterBird": {
+      "x": 433,
+      "y": 100,
+      "imagePath": "images/enemies/bird.png",   
+      "width": 67,
+      "height": 46, 
+      "spriteMap": {
+        "captureX": 0,
+        "captureY": 0,
+        "fillX": 67,
+        "fillY": 46, 
+        "frames": [ 0, 67 ]
+      } 
+    }
+  }
+}
+
+
+
