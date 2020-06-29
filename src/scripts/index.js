@@ -9,6 +9,10 @@ function keyPressed() {
   game.keyPressed(key); 
 }
 
+function keyReleased() {
+  game.keyReleased(key); 
+}
+
 function draw() {
   background('#09adff');
 

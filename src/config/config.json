@@ -7,6 +7,8 @@
   "character": {
     "x": 20,
     "y": 0,
+    "soundPathGameOver": "sounds/game-over.mp3", 
+    "soundPathJump": "sounds/jump.mp3", 
     "walking": {
       "imagePath": "images/character/walking.png",   
       "width": 41,
@@ -17,6 +19,42 @@
         "fillX": 41,
         "fillY": 67, 
         "frames": [ 0, 41, 82 ]
+      } 
+    },
+    "dead": {
+      "imagePath": "images/character/dead.png",   
+      "width": 46,
+      "height": 66, 
+      "spriteMap": {
+        "captureX": 0,
+        "captureY": 0,
+        "fillX": 46,
+        "fillY": 66, 
+        "frames": [ 0, 45, 89 ]
+      } 
+    },
+    "jumping": {
+      "imagePath": "images/character/jump.png",   
+      "width": 45,
+      "height": 61, 
+      "spriteMap": {
+        "captureX": 0,
+        "captureY": 0,
+        "fillX": 45,
+        "fillY": 61, 
+        "frames": [ 0 ]
+      } 
+    },
+    "crouched": {
+      "imagePath": "images/character/crouched.png",   
+      "width": 41,
+      "height": 56, 
+      "spriteMap": {
+        "captureX": 0,
+        "captureY": 0,
+        "fillX": 41,
+        "fillY": 56, 
+        "frames": [ 0 ]
       } 
     }
   },

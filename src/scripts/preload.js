@@ -7,6 +7,7 @@ let deadImage;
 let jumpImage;
 let crouchedImage; 
 let jumpSound;
+let gameOverSound;
 
 function preload() {
   config = loadJSON('config/config.json', fillConfigAfterLoad);
@@ -14,11 +15,12 @@ function preload() {
 
 function fillConfigAfterLoad(data) {
   walkingImage = loadImage(config.character.walking.imagePath);
-  jumpImage = loadImage('images/character/jump.png');
+  jumpImage = loadImage(config.character.jumping.imagePath);
   birdImage = loadImage(config.enemies.monsterBird.imagePath);
   ghostImage = loadImage('images/enemies/ghost.png');
-  deadImage = loadImage('images/character/dead.png');
-  crouchedImage = loadImage('images/character/crouched.png');
+  deadImage = loadImage(config.character.dead.imagePath);
+  crouchedImage = loadImage(config.character.crouched.imagePath);
 
-  jumpSound = loadSound('sounds/jump.mp3');
+  jumpSound = loadSound(config.character.soundPathJump);
+  gameOverSound = loadSound(config.character.soundPathGameOver);
 } 

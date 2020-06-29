@@ -6,7 +6,7 @@ class Character extends Animation {
     this.isDead = false; 
     this.isJumping = false; 
     this.isCrouching = false; 
-    this.jumpSpeed = 0; 
+    this.upSpeed = 0; 
     this.gravity = 3; 
 
     this.defaultPositionY = this.y - this.height; 
@@ -14,90 +14,83 @@ class Character extends Animation {
   }
 
   jump() {
-    if(this.isJumping) return false; 
+    if(this.isJumping || this.isDead) return false; 
 
-    this.jumpSpeed = -30;  
-
+    this.upSpeed = -30;  
     this.isJumping = true;
-
-    this.image = jumpImage; 
-    this.width = 45; 
-    this.height = 61;
-    this.spriteMap = {
-      captureX: 0,
-      captureY: 0,
-      fillX: 45,
-      fillY: 61, 
-      frames: [ 0 ]
-    };
-
+    this.changeAnimationImage('jumping'); 
     jumpSound.play(); 
+
   }
 
   crouched() {
-    
-    this.image = crouchedImage; 
-    this.width = 41; 
-    this.height = 56;
-    this.spriteMap = {
-      captureX: 0,
-      captureY: 0,
-      fillX: 41,
-      fillY: 56, 
-      frames: [ 0 ]
+    if(this.isJumping || this.isDead) return false; 
+
+    if(this.isCrouching) {
+      this.yVariation = 0; 
+      this.changeAnimationImage('walking');
+    } else {
+      this.changeAnimationImage('crouched'); 
+      this.yVariation = 11; 
     }
 
-    this.yVariation = 11; 
+    this.isCrouching = !this.isCrouching; 
 
-    setTimeout(() => {
-      this.isCrouching = true; 
-      this.yVariation = 0; 
-    }, 1000);
   }
   
   applyGravity() {
-    
-    this.y = this.y + this.jumpSpeed; 
-    this.jumpSpeed = this.jumpSpeed + this.gravity
+    this.y = this.y + this.upSpeed; 
+    this.upSpeed = this.upSpeed + this.gravity
     
     const isOutOfDefaultY = this.y > this.defaultPositionY + this.yVariation;
     if(isOutOfDefaultY) this.y = this.defaultPositionY + this.yVariation; 
 
     const isJumping = this.isJumping && isOutOfDefaultY; 
     
-    if(isJumping || this.isCrouching) {
+    if(isJumping) {
       this.isJumping = false; 
-      this.isCrouching = false; 
-
-      this.image = walkingImage; 
-      this.width = 41; 
-      this.height = 67;
-      this.spriteMap = {
-        captureX: 0,
-        captureY: 0,
-        fillX: 41,
-        fillY: 67, 
-        frames: [ 0, 41, 82 ]
-      }
+      this.changeAnimationImage('walking');
     }
 
   }
 
   dead() {
+    this.upSpeed = -5;  
+
     if(!this.isDead) {
-      this.spriteMap = {
-        captureX: 0,
-        captureY: 0,
-        fillX: 46,
-        fillY: 66, 
-        frames: [ 0, 45, 89 ]
-      }
-  
-      this.image = deadImage;
-      this.width = 46; 
-      this.height = 66; 
-  
+      gameOverSound.play();
+      gameOverSound.stop(3)
+      this.changeAnimationImage('dead'); 
       this.isDead = true; 
+    }
+  }
+
+  changeAnimationImage(state) {
+    switch(state) {
+      case 'jumping':
+        this.image = jumpImage;
+        this.width = config.character.jumping.width;
+        this.height = config.character.jumping.height; 
+        this.spriteMap = config.character.jumping.spriteMap;
+        break;  
+      case 'walking':
+        this.image = walkingImage;
+        this.width = config.character.walking.width;
+        this.height = config.character.walking.height; 
+        this.spriteMap = config.character.walking.spriteMap;
+        break;  
+      case 'dead':
+        this.image = deadImage;
+        this.width = config.character.dead.width;
+        this.height = config.character.dead.height; 
+        this.spriteMap = config.character.dead.spriteMap;
+        break;  
+      case 'crouched':
+        this.image = crouchedImage; 
+        this.width = config.character.crouched.width;
+        this.height = config.character.crouched.height; 
+        this.spriteMap = config.character.crouched.spriteMap;
+        break;  
     }
   }
 

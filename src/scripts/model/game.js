@@ -2,25 +2,44 @@ class Game {
   constructor() {
     this.character = this._buildCharacter(config.character.x, config.canvas.height);
     this.enemies = this._buildEnemies(); 
+    this.isCollide = false;
+
   }
 
   draw() {
     this.character.applyGravity(); 
-        
     this.character.draw(); 
-    this.enemies[0].draw(); 
-    this.enemies[1].draw(); 
+
+    if(this.isCollide) {
+      this.character.dead(); 
+    } else {
+      for(let index = 0; index < this.enemies.length; index++)  {
+        this.enemies[index].draw();
+        this.enemies[index].move(); 
+  
+        //this.isCollide = this.checkIfTheyCollide(this.character, this.enemies[index]);
+        
+        if(this.isCollide) break; 
+        
+      }
+    }
   }
 
-  play() {}
+  checkIfTheyCollide(character, enemy) {
+    return character.x > enemy.x && character.x - character.width < enemy.x; 
+  }
 
   over() {}
 
   keyPressed(key) {
     if(key === 'ArrowUp') this.character.jump(); 
-
     if(key === 'ArrowDown') this.character.crouched();
   }
+
+  keyReleased(key) {
+    if(key === 'ArrowDown') this.character.crouched();
+  }
+
 
   _buildCharacter(x, y) {
     const character = new Character(
