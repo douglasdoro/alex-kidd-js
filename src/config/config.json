@@ -3,7 +3,8 @@
     "width": 500,
     "height": 375
   },
-  "frameFate": 25, 
+  "frameFate": 25,
+  "mainThemeSoundPath": "sounds/main-theme.mp3", 
   "character": {
     "x": 50,
     "y": 0,
@@ -60,8 +61,8 @@
   },
   "enemies": {
     "ghost": {
-      "x": 433,
-      "y": 330,
+      "x": -433,
+      "y": 250,
       "imagePath": "images/enemies/ghost.png",   
       "width": 42,
       "height": 45, 
@@ -94,7 +95,7 @@
         "imagePath": "images/stages/one/ground.png", 
         "width": 42,
         "height": 84,
-        "speed": 5        
+        "speed": 1        
       },
       "defaultPlayerY": 84,
       "elements": {

@@ -11,6 +11,7 @@ let gameOverSound;
 let stageOneImage; 
 let singleTreeImage; 
 let cloudImage; 
+let mainThemeSound;
 
 function preload() {
   config = loadJSON('config/config.json', fillConfigAfterLoad);
@@ -29,4 +30,5 @@ function fillConfigAfterLoad(data) {
 
   jumpSound = loadSound(config.character.soundPathJump);
   gameOverSound = loadSound(config.character.soundPathGameOver);
+  mainThemeSound = loadSound(config.mainThemeSoundPath);
 } 

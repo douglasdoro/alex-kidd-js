@@ -43,7 +43,7 @@ class Scenario {
       
       const isOutOfCanvas = this.groundX < -config.canvas.width;
       if(isOutOfCanvas) this.groundX = 0; 
-      
+
     });
   }
 

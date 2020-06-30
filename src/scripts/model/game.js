@@ -13,6 +13,7 @@ class Game {
     this.character = this._buildCharacter(config.character.x, this.stage.defaultPlayerY);
     this.enemies = this._buildEnemies(); 
 
+    mainThemeSound.loop();
   }
 
   draw() {
@@ -27,20 +28,30 @@ class Game {
         this.enemies[index].draw();
         this.enemies[index].move(); 
         
-        //this.isCollide = this.checkIfTheyCollide(this.character, this.enemies[index]);
+        this.isCollide = this.checkIfTheyCollide(this.character, this.enemies[index]);
         
         if(this.isCollide) break; 
         
       }
     }
+
     this.character.draw(); 
   }
 
   checkIfTheyCollide(character, enemy) {
-    return character.x > enemy.x && character.x - character.width < enemy.x; 
-  }
 
-  over() {}
+    const colision = collideRectRect(
+      character.x,
+      character.y,
+      character.width,
+      character.height,
+      enemy.x,
+      enemy.y,
+      enemy.width,
+      enemy.height
+    );
+    return colision; 
+  }
 
   keyPressed(key) {
     if(key === 'ArrowUp') this.character.jump(); 
@@ -50,7 +61,6 @@ class Game {
   keyReleased(key) {
     if(key === 'ArrowDown') this.character.crouched();
   }
-
 
   _buildCharacter(x, y) {
     const character = new Character(
