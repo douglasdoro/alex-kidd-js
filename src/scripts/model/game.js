@@ -1,28 +1,39 @@
 class Game {
   constructor() {
-    this.character = this._buildCharacter(config.character.x, config.canvas.height);
-    this.enemies = this._buildEnemies(); 
+    this.character;
+    this.enemies;  
+    this.isCollide;
+    
+    this.setup(); 
+  }
+
+  setup() {
     this.isCollide = false;
+    this.stage = new Stage();
+    this.character = this._buildCharacter(config.character.x, this.stage.defaultPlayerY);
+    this.enemies = this._buildEnemies(); 
 
   }
 
   draw() {
     this.character.applyGravity(); 
-    this.character.draw(); 
-
+    
+    this.stage.draw(); 
+    
     if(this.isCollide) {
       this.character.dead(); 
     } else {
       for(let index = 0; index < this.enemies.length; index++)  {
         this.enemies[index].draw();
         this.enemies[index].move(); 
-  
+        
         //this.isCollide = this.checkIfTheyCollide(this.character, this.enemies[index]);
         
         if(this.isCollide) break; 
         
       }
     }
+    this.character.draw(); 
   }
 
   checkIfTheyCollide(character, enemy) {
