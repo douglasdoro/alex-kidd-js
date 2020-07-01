@@ -13,7 +13,7 @@ class Game {
     this.character = this._buildCharacter(config.character.x, this.stage.defaultPlayerY);
     this.enemies = this._buildEnemies(); 
 
-    mainThemeSound.loop();
+    //mainThemeSound.loop();
   }
 
   draw() {

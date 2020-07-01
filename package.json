@@ -1,0 +1,41 @@
+{
+  "name": "alex-kidd-js",
+  "version": "0.0.1",
+  "description": "just forfun with js",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gulp": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/douglasdoro/alex-kidd-js.git"
+  },
+  "keywords": [
+    "javascipt",
+    "alex-kidd"
+  ],
+  "author": "douglas fontes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/douglasdoro/alex-kidd-js/issues"
+  },
+  "homepage": "https://github.com/douglasdoro/alex-kidd-js#readme",
+  "devDependencies": {
+    "del": "^5.1.0",
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-copy": "^4.0.1",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-jsonminify": "^1.1.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-terser": "^1.2.0",
+    "gulp-uglify-es": "^2.0.0"
+  }
+}
