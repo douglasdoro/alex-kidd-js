@@ -1,22 +1,29 @@
 class Character extends Animation {
-  constructor(image, x, y, width, height, spriteMap) {
-    super(image, x, y, width, height, spriteMap);
+  constructor(image, width, height, spriteMap, xInitial,  yInitial) {
+    super(image, width, height, spriteMap);
 
-    this.speedAnimation = .23; 
+    this.animationSpeed = config.character.animationSpeed; 
     this.isDead = false; 
     this.isJumping = false; 
     this.isCrouching = false; 
     this.upSpeed = 0; 
-    this.gravity = 3; 
+    this.gravity = 2; 
 
-    this.defaultPositionY = this.y - this.height; 
+    this._yInitial = yInitial - this.height; 
+    this.y = this._yInitial; 
+    this.x = xInitial; 
+
     this.yVariation = 0; 
+  }
+
+  defineYPosition(position) {
+    this.y = position - this.height;
   }
 
   jump() {
     if(this.isJumping || this.isDead) return false; 
 
-    this.upSpeed = -30;  
+    this.upSpeed = -20;  
     this.isJumping = true;
     this.changeAnimationImage('jumping'); 
     jumpSound.play(); 
@@ -42,10 +49,10 @@ class Character extends Animation {
     this.y = this.y + this.upSpeed; 
     this.upSpeed = this.upSpeed + this.gravity
     
-    const isOutOfDefaultY = this.y > this.defaultPositionY + this.yVariation;
-    if(isOutOfDefaultY) this.y = this.defaultPositionY + this.yVariation; 
+    const isOutOfYInitial = this.y > this._yInitial + this.yVariation;
+    if(isOutOfYInitial) this.y = this._yInitial + this.yVariation; 
 
-    const isJumping = this.isJumping && isOutOfDefaultY; 
+    const isJumping = this.isJumping && isOutOfYInitial; 
     
     if(isJumping) {
       this.isJumping = false; 
@@ -55,7 +62,7 @@ class Character extends Animation {
   }
 
   dead() {
-    this.upSpeed = -5;  
+    this.upSpeed = -4;  
 
     if(!this.isDead) {
       gameOverSound.play();

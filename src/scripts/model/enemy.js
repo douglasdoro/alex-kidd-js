@@ -1,14 +1,14 @@
 class Enemy extends Animation {
-  constructor(image, x, y, width, height, spriteMap) {
-    super(image, x, y, width, height, spriteMap);
-    this.speed = 2; 
-
+  constructor(image, width, height, spriteMap) {
+    super(image, width, height, spriteMap);
   }
 
   move() {
-    this.x = this.x - this.speed;
+    this.x = this.x - this.xMovementSpeed;
+  }
 
-    const isOutOfCanvas = this.x - this.width < -this.width; 
-    if(isOutOfCanvas) this.x = config.canvas.width + this.width;
+  isOutOfCanvas() {
+    const isOutOfCanvas = this.x < -this.width; 
+    return isOutOfCanvas; 
   }
 }

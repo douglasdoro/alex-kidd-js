@@ -1,21 +1,25 @@
 class Scenario {
-  constructor() {
-    this.groundInfo;
-    this.groundY;
+  constructor(scenarioConfig) {
+    this.config = scenarioConfig;
+    this.groundY; 
     this.groundCollection;
     this.groundX;
     this._elements;
+    this.elementsSpeed;
+    this.groundSpeed; 
 
     this.setup(); 
   }
 
   setup() {
     this.groundInfo = config.stage.one.ground; 
-    this.groundY = config.canvas.height - this.groundInfo.height; 
+    this.groundY = config.canvas.height - this.config.ground.height; 
     this.groundCollection = this._buildGround();
-    this.groundX = 0; 
+    this.groundX = 0;
+    this.groundSpeed = this.config.ground.speed;  
 
-    this._elements = config.stage.one.elements.collection;
+    this._elements = this.config.elements.collection;
+    
   }
 
   elements() {
@@ -36,7 +40,7 @@ class Scenario {
   }
   
   ground(){
-    this.groundX = this.groundX - this.groundInfo.speed;  
+    this.groundX = this.groundX - this.groundSpeed;  
     this.groundCollection.forEach(indexX => {
       const dynamicPositionX = indexX + this.groundX
       image(stageOneImage, dynamicPositionX , this.groundY); 
@@ -51,7 +55,7 @@ class Scenario {
     if(!element.y) element.y = this.groundY - element.height;
 
     image(element.image, element.x , element.y, element.width, element.height); 
-    element.x = element.x + parseFloat(element.speed);
+    element.x = element.x + this._defineMovementSpeed(element.speed);
 
     const isOutOfCanvas = element.x > config.canvas.width + element.width; 
     if(isOutOfCanvas) {
@@ -60,13 +64,20 @@ class Scenario {
   }
 
   _drawElementRightToLeft(element) {
-    if(!element.y) element.y = this.groundY - element.height;
+    const noHeight = !element.y;  
+    if(noHeight) element.y = this.groundY - element.height;
 
     image(element.image, element.x , element.y, element.width, element.height); 
-    element.x = element.x - parseFloat(element.speed);
+    
+    element.x = element.x - this._defineMovementSpeed(element.speed);
 
     const isOutOfCanvas = element.x < -element.width; 
     if(isOutOfCanvas) element.x = element.initialX; 
+  }
+
+  _defineMovementSpeed(element) {
+    return this.elementsSpeed === 0 ?
+    this.elementsSpeed : parseFloat(element);
   }
 
   _buildGround() {
@@ -75,7 +86,7 @@ class Scenario {
 
     while(groundWidthIndex < config.canvas.width * 2) {
       groundCollection.push(groundWidthIndex);
-      groundWidthIndex = groundWidthIndex + this.groundInfo.width; 
+      groundWidthIndex = groundWidthIndex + this.config.ground.width; 
     }
 
     return groundCollection; 

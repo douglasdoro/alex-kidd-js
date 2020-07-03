@@ -1,19 +1,21 @@
 class Animation {
-  constructor(image, x, y, width, height, spriteMap) {
+  constructor(image, width, height, spriteMap) {
     this.image = image;
-    this.x = x;
-    this.y = y; 
+    this.x = 0;
+    this.y = 0; 
+    this.xMovementSpeed; 
     this.width = width; 
     this.height = height; 
     this.spriteMap = spriteMap
 
     this.frame = 0; 
-    this.speedAnimation = .1; 
+    this.animationSpeed = .1; 
   }
 
   draw() {
-    noFill();
-    rect(this.x, this.y, this.width, this.height);
+    // Only to debug
+    // noFill();
+    // rect(this.x, this.y, this.width, this.height);
 
     image(this.image,
       this.x,
@@ -35,7 +37,7 @@ class Animation {
     if(this.frame >= this.spriteMap.frames.length -1) {
       this.frame = 0; 
     } else {
-      this.frame = this.frame + this.speedAnimation; 
+      this.frame = this.frame + this.animationSpeed; 
     } 
   }
 }

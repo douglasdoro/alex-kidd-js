@@ -1,103 +1,38 @@
 class Game {
   constructor() {
-    this.character;
-    this.enemies;  
-    this.isCollide;
-    
-    this.setup(); 
+    this.scenario; 
+    this.events = []; 
+     
+    this.isOver;
   }
 
   setup() {
     this.isCollide = false;
-    this.stage = new Stage();
-    this.character = this._buildCharacter(config.character.x, this.stage.defaultPlayerY);
-    this.enemies = this._buildEnemies(); 
-
-    //mainThemeSound.loop();
+       
+    const stageConfig = config.stage.one; 
+    this.stage = new Stage(stageConfig);
+    this.stage.startSound(); 
   }
 
   draw() {
-    this.character.applyGravity(); 
-    
-    this.stage.draw(); 
-    
-    if(this.isCollide) {
-      this.character.dead(); 
-    } else {
-      for(let index = 0; index < this.enemies.length; index++)  {
-        this.enemies[index].draw();
-        this.enemies[index].move(); 
-        
-        this.isCollide = this.checkIfTheyCollide(this.character, this.enemies[index]);
-        
-        if(this.isCollide) break; 
-        
-      }
-    }
+    this.stage.draw(this.events, (isCollide) => { 
+      if (this.events.length) this.events = [];
 
-    this.character.draw(); 
-  }
+      this.isOver = isCollide; 
+    }); 
 
-  checkIfTheyCollide(character, enemy) {
-
-    const colision = collideRectRect(
-      character.x,
-      character.y,
-      character.width,
-      character.height,
-      enemy.x,
-      enemy.y,
-      enemy.width,
-      enemy.height
-    );
-    return colision; 
+    if(this.isOver) this.events.push('dead'); 
   }
 
   keyPressed(key) {
-    if(key === 'ArrowUp') this.character.jump(); 
-    if(key === 'ArrowDown') this.character.crouched();
+    this._addEvent(key); 
   }
 
   keyReleased(key) {
-    if(key === 'ArrowDown') this.character.crouched();
+    if(key === 'ArrowDown') this._addEvent(key); 
   }
 
-  _buildCharacter(x, y) {
-    const character = new Character(
-        walkingImage,
-        x, 
-        y,
-        config.character.walking.width,
-        config.character.walking.height,
-        config.character.walking.spriteMap
-      ); 
-    
-    return character; 
-  }
-
-  _buildEnemies() {
-    const enemies = []; 
-
-    const monsterBird = new Enemy(
-      birdImage,
-      config.enemies.monsterBird.x,
-      config.enemies.monsterBird.y,
-      config.enemies.monsterBird.width,
-      config.enemies.monsterBird.height,
-      config.enemies.monsterBird.spriteMap 
-    );
-  
-    const ghost = new Enemy(
-      ghostImage,
-      config.enemies.ghost.x,
-      config.enemies.ghost.y,
-      config.enemies.ghost.width,
-      config.enemies.ghost.height,
-      config.enemies.ghost.spriteMap 
-    );
-
-    enemies.push(monsterBird, ghost);
-
-    return enemies; 
+  _addEvent(eventName) {
+    if(!this.events.includes(eventName)) this.events.push(key); 
   }
 }

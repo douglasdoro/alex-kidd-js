@@ -24,9 +24,9 @@ function fillConfigAfterLoad(data) {
   ghostImage = loadImage(config.enemies.ghost.imagePath);
   deadImage = loadImage(config.character.dead.imagePath);
   crouchedImage = loadImage(config.character.crouched.imagePath);
-  stageOneImage = loadImage(config.stage.one.ground.imagePath);
-  singleTreeImage = loadImage(config.stage.one.elements.tree.imagePath);
-  cloudImage = loadImage(config.stage.one.elements.cloud.imagePath);
+  stageOneImage = loadImage(config.stage.one.scenario.ground.imagePath);
+  singleTreeImage = loadImage(config.stage.one.scenario.elements.tree.imagePath);
+  cloudImage = loadImage(config.stage.one.scenario.elements.cloud.imagePath);
 
   jumpSound = loadSound(config.character.soundPathJump);
   gameOverSound = loadSound(config.character.soundPathGameOver);

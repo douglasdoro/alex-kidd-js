@@ -1,8 +1,9 @@
 function setup() {
   createCanvas(config.canvas.width, config.canvas.height); // 4 : 3
-  frameRate(config.frameFate);
+  frameRate(config.frameRate);
 
   game = new Game(); 
+  game.setup(); 
 }
 
 function keyPressed() {
